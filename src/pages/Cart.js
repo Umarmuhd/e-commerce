@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { CartState } from "../context";
 
 import "./Cart.css";
 
 import caret from "../assets/images/caret-back.svg";
-import coke from "../assets/images/coke.png";
 import trash from "../assets/images/trash.svg";
 import product from "../assets/images/product-1.png";
 
 export default function Cart() {
+  const {
+    state: { cart },
+    dispatch,
+  } = CartState();
+  const [total, setTotal] = useState(0);
+
+  console.log(total, dispatch);
+
+  useEffect(() => {
+    setTotal(
+      cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
+    );
+  }, [cart]);
+
+  console.log(cart);
   return (
     <>
       <div className="cart">
@@ -31,62 +46,36 @@ export default function Cart() {
         <div className="container">
           <div className="cart-content">
             <ul className="cart-items">
-              <li className="cart-item">
-                <div className="flex">
-                  <img src={coke} alt="..." />
-                  <div className="details">
-                    <h2 className="name sm font-normal">
-                      2019 Vintage Coca Cola
-                    </h2>
-                    <p className="price sm font-bolder">N18,099.09</p>
+              {cart.map((item) => (
+                <li className="cart-item" key={item.id}>
+                  <div className="flex">
+                    <img src={item.image} alt="..." />
+                    <div className="details">
+                      <h2 className="name sm font-normal">{item.name}</h2>
+                      <p className="price sm font-bolder">N{item.price}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="line"></div>
-                <div className="flex controls">
-                  <button className="delete flex">
-                    <img src={trash} alt="delete" />
-                    <span className="sm">Delete</span>
-                  </button>
-                  <div className="params flex">
-                    <button>-</button>
-                    <input
-                      type="number"
-                      className="font-medium"
-                      min={1}
-                      max={100}
-                    />
-                    <button>+</button>
+                  <div className="line"></div>
+                  <div className="flex controls">
+                    <button className="delete flex">
+                      <img src={trash} alt="delete" />
+                      <span className="sm">Delete</span>
+                    </button>
+                    <div className="params flex">
+                      <button>-</button>
+                      <input
+                        type="number"
+                        className="font-medium"
+                        min={1}
+                        max={100}
+                        value={item.qty}
+                        onChange={(e) => console.log(e.target.value)}
+                      />
+                      <button>+</button>
+                    </div>
                   </div>
-                </div>
-              </li>
-              <li className="cart-item">
-                <div className="flex">
-                  <img src={coke} alt="..." />
-                  <div className="details">
-                    <h2 className="name sm font-normal">
-                      2019 Vintage Coca Cola
-                    </h2>
-                    <p className="price sm font-bolder">N18,099.09</p>
-                  </div>
-                </div>
-                <div className="line"></div>
-                <div className="flex controls">
-                  <button className="delete flex">
-                    <img src={trash} alt="delete" />
-                    <span className="sm">Delete</span>
-                  </button>
-                  <div className="params flex">
-                    <button>-</button>
-                    <input
-                      type="number"
-                      className="font-medium"
-                      min={0}
-                      max={100}
-                    />
-                    <button>+</button>
-                  </div>
-                </div>
-              </li>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

@@ -22,6 +22,9 @@
   margin-bottom: 1rem;
 }
 
+.cart .cart-item img {
+  width: 30%;
+}
 .cart .cart-item .details {
   margin-left: 1rem;
 }

@@ -58,7 +58,7 @@ export default function ViewProduct() {
                 </Link>
               </li>
               <li className="cart">
-                <Link to="/cart">
+                <Link to="/view-cart">
                   <span className="around-img">
                     <span className="xs">{cart.length}</span>
                     <img src={mycart} alt="my cart" />
