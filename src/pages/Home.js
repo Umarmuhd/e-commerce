@@ -26,6 +26,7 @@ export default function Home() {
 
   const {
     state: { cart },
+    productDispatch,
   } = CartState();
 
   const transformProducts = () => {
@@ -101,6 +102,12 @@ export default function Home() {
               type="text"
               placeholder="Search merchbuy"
               className="w-full"
+              onChange={(e) => {
+                productDispatch({
+                  type: "FILTER_BY_SEARCH",
+                  payload: e.target.value,
+                });
+              }}
             />
           </form>
         </div>
