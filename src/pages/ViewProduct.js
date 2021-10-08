@@ -26,6 +26,8 @@ export default function ViewProduct() {
 
   let { id } = useParams();
 
+  console.log(cart);
+
   useEffect(() => {
     setLoading(true);
     try {
@@ -55,9 +57,12 @@ export default function ViewProduct() {
                   <img src={search} alt="search here" />
                 </Link>
               </li>
-              <li>
+              <li className="cart">
                 <Link to="/cart">
-                  <img src={mycart} alt="my cart" />
+                  <span className="around-img">
+                    <span className="xs">{cart.length}</span>
+                    <img src={mycart} alt="my cart" />
+                  </span>
                 </Link>
               </li>
             </ul>

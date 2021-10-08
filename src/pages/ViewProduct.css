@@ -19,6 +19,33 @@
   margin-right: 1rem;
 }
 
+.view-product .other-nav li.cart span.around-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #edf2f7;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+.view-product .other-nav li.cart span.around-img span {
+  background: #ee6f44;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+}
+
 .view-product .product-img {
   margin-bottom: 1rem;
 }
