@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@300;400;500;600;700;800&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Noto Sans Display", sans-serif;
+  background: #fff;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a {
+  color: #212c3d;
+  text-decoration: none;
+}
+
+p {
+  color: #212c3d;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Components styles goes here  */
+
+/* ReviewItem  */
+.review-item {
+  margin-bottom: 0.5rem;
+}
+.review-item .rates {
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.review-item .stars {
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.review-item p.review-text {
+  margin-bottom: 18px;
+}
+
+.review-item .name-image img {
+  width: 1.5rem;
+}
+.review-item .name-image .name {
+  margin-left: 1rem;
+}
+
+/* Navigation */
+.navigation-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+.navigation .nav-items {
+  justify-content: space-between;
+  align-items: center;
+}
+.navigation .nav-items li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.navigation .nav-items li a img {
+  margin-bottom: 0.625rem;
+}
+.navigation .nav-items li a p {
+  font-size: 0.625rem;
+  line-height: 1.125rem;
+}
