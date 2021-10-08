@@ -70,16 +70,48 @@ export default function Cart() {
                       <span className="sm">Delete</span>
                     </button>
                     <div className="params flex">
-                      <button>-</button>
+                      <button
+                        onClick={() =>
+                          dispatch({
+                            type: "CHANGE_CART_QTY",
+                            payload: {
+                              id: item.id,
+                              qty: (item.qty -= 1),
+                            },
+                          })
+                        }
+                      >
+                        -
+                      </button>
                       <input
                         type="number"
                         className="font-medium"
                         min={1}
                         max={100}
                         value={item.qty}
-                        onChange={(e) => console.log(e.target.value)}
+                        onChange={(e) =>
+                          dispatch({
+                            type: "CHANGE_CART_QTY",
+                            payload: {
+                              id: item.id,
+                              qty: parseInt(e.target.value, 10),
+                            },
+                          })
+                        }
                       />
-                      <button>+</button>
+                      <button
+                        onClick={() =>
+                          dispatch({
+                            type: "CHANGE_CART_QTY",
+                            payload: {
+                              id: item.id,
+                              qty: (item.qty += 1),
+                            },
+                          })
+                        }
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                 </li>
