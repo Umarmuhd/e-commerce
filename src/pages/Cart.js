@@ -57,7 +57,15 @@ export default function Cart() {
                   </div>
                   <div className="line"></div>
                   <div className="flex controls">
-                    <button className="delete flex">
+                    <button
+                      className="delete flex"
+                      onClick={() =>
+                        dispatch({
+                          type: "REMOVE_FROM_CART",
+                          payload: item,
+                        })
+                      }
+                    >
                       <img src={trash} alt="delete" />
                       <span className="sm">Delete</span>
                     </button>
@@ -89,12 +97,16 @@ export default function Cart() {
                 </p>
                 <p className="flex total">
                   <span className="text sm">Total</span>
-                  <span className="price font-bold sm">N18,099.09</span>
+                  <span className="price font-bold sm">
+                    N{total.toFixed(2)}
+                  </span>
                 </p>
               </div>
-              <button type="submit" className="font-medium md py-4">
-                Checkout
-              </button>
+              <Link to="/checkout">
+                <button type="submit" className="font-medium md py-4">
+                  Checkout
+                </button>
+              </Link>
             </div>
           </div>
         </div>

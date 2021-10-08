@@ -7,7 +7,7 @@ import { CartState } from "../context";
 
 import location from "../assets/images/location-marker.svg";
 import orders from "../assets/images/package.svg";
-import cart from "../assets/images/cart.svg";
+import mycart from "../assets/images/cart.svg";
 
 import categories from "../assets/images/category.svg";
 import popular from "../assets/images/popular.svg";
@@ -22,6 +22,10 @@ export default function Home() {
   const {
     state: { products },
     productState: { sort, byStock, byFastDelivery, byRating, searchQuery },
+  } = CartState();
+
+  const {
+    state: { cart },
   } = CartState();
 
   const transformProducts = () => {
@@ -84,8 +88,8 @@ export default function Home() {
               <li>
                 <Link to="/view-cart" className="flex">
                   <span className="around-img cart">
-                    <span className="xs">3</span>
-                    <img src={cart} alt="my cart" />
+                    <span className="xs">{cart.length}</span>
+                    <img src={mycart} alt="my cart" />
                   </span>
                   <span className="sm">Cart</span>
                 </Link>
