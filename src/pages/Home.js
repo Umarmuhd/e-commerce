@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Carousel } from "@trendyol-js/react-carousel";
 import Navigation from "../components/Navigation";
 
+import { CartState } from "../context";
+
 import location from "../assets/images/location-marker.svg";
 import orders from "../assets/images/package.svg";
 import cart from "../assets/images/cart.svg";
@@ -17,6 +19,42 @@ import product from "../assets/images/product-1.png";
 import "./Home.css";
 
 export default function Home() {
+  const {
+    state: { products },
+    productState: { sort, byStock, byFastDelivery, byRating, searchQuery },
+  } = CartState();
+
+  const transformProducts = () => {
+    let sortedProducts = products;
+
+    if (sort) {
+      sortedProducts = sortedProducts.sort((a, b) =>
+        sort === "lowToHigh" ? a.price - b.price : b.price - a.price
+      );
+    }
+
+    if (!byStock) {
+      sortedProducts = sortedProducts.filter((prod) => prod.inStock);
+    }
+
+    if (byFastDelivery) {
+      sortedProducts = sortedProducts.filter((prod) => prod.fastDelivery);
+    }
+
+    if (byRating) {
+      sortedProducts = sortedProducts.filter(
+        (prod) => prod.ratings >= byRating
+      );
+    }
+
+    if (searchQuery) {
+      sortedProducts = sortedProducts.filter((prod) =>
+        prod.name.toLowerCase().includes(searchQuery)
+      );
+    }
+
+    return sortedProducts;
+  };
   return (
     <>
       <div className="home">
@@ -26,7 +64,7 @@ export default function Home() {
               <h1 className="base">Trollbasket</h1>
             </Link>
 
-            <ul class="right-menu flex">
+            <ul className="right-menu flex">
               <li>
                 <Link to="/" className="flex">
                   <span className="around-img">
@@ -55,7 +93,11 @@ export default function Home() {
             </ul>
           </nav>
           <form className="relative">
-            <input type="text" placeholder="Search merchbuy" class="w-full" />
+            <input
+              type="text"
+              placeholder="Search merchbuy"
+              className="w-full"
+            />
           </form>
         </div>
         <div className="showcase">
@@ -115,46 +157,18 @@ export default function Home() {
           {" "}
           <div className="container">
             <div className="products">
-              <div className="product-item">
-                <img src={product} alt="..." />
-                <h3 className="name xs text-grey font-normal">
-                  Free sample small tote bag gucci fen...
-                </h3>
-                <p className="price font-bold">₦900 - ₦1,500</p>
-                <p className="qnty xs">MOQ 4 (pieces)</p>
-              </div>
-              <div className="product-item">
-                <img src={product} alt="..." />
-                <h3 className="name xs text-grey font-normal">
-                  Free sample small tote bag gucci fen...
-                </h3>
-                <p className="price font-bold">₦900 - ₦1,500</p>
-                <p className="qnty xs">MOQ 4 (pieces)</p>
-              </div>
-              <div className="product-item">
-                <img src={product} alt="..." />
-                <h3 className="name xs text-grey font-normal">
-                  Free sample small tote bag gucci fen...
-                </h3>
-                <p className="price font-bold">₦900 - ₦1,500</p>
-                <p className="qnty xs">MOQ 4 (pieces)</p>
-              </div>
-              <div className="product-item">
-                <img src={product} alt="..." />
-                <h3 className="name xs text-grey font-normal">
-                  Free sample small tote bag gucci fen...
-                </h3>
-                <p className="price font-bold">₦900 - ₦1,500</p>
-                <p className="qnty xs">MOQ 4 (pieces)</p>
-              </div>
-              <div className="product-item">
-                <img src={product} alt="..." />
-                <h3 className="name xs text-grey font-normal">
-                  Free sample small tote bag gucci fen...
-                </h3>
-                <p className="price font-bold">₦900 - ₦1,500</p>
-                <p className="qnty xs">MOQ 4 (pieces)</p>
-              </div>
+              {transformProducts().map((product) => (
+                <Link key={product.id} to={"/view-product/" + product.id}>
+                  <div className="product-item">
+                    <img src={product.image} alt="..." />
+                    <h3 className="name xs text-grey font-normal">
+                      {product.name}
+                    </h3>
+                    <p className="price font-bold">₦{product.price}</p>
+                    <p className="qnty xs">{product.inStock} (in stock)</p>
+                  </div>
+                </Link>
+              ))}
               <div className="product-item">
                 <img src={product} alt="..." />
                 <h3 className="name xs text-grey font-normal">

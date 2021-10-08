@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Context from "./context";
 import "./styles/utilities.css";
 import "./styles/index.css";
 import App from "./App";
@@ -7,7 +8,9 @@ import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Context>
+      <App />
+    </Context>
   </React.StrictMode>,
   document.getElementById("root")
 );

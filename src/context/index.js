@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 import faker from "faker";
-import { cartReducer, productReducer } from "./Reducers";
+import { cartReducer, productReducer } from "../reducers";
 
 const Cart = createContext();
 faker.seed(99);
@@ -15,6 +15,15 @@ const Context = ({ children }) => {
     fastDelivery: faker.datatype.boolean(),
     ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
   }));
+
+  //   {
+
+  //     description: “Get comfy and comfortable with the new 2019 designer sneaker
+  //     for all your events“,
+
+  //     location: “Lagos”,
+  //     stock: 5,
+  //     }
 
   const [state, dispatch] = useReducer(cartReducer, {
     products: products,
