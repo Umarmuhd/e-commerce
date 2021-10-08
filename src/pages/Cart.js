@@ -93,7 +93,7 @@ export default function Cart() {
               <div>
                 <p className="flex subtotal">
                   <span className="text sm">Subtotal</span>
-                  <span className="price sm">N18,099.09</span>
+                  <span className="price sm">N{total.toFixed(2)}</span>
                 </p>
                 <p className="flex total">
                   <span className="text sm">Total</span>
